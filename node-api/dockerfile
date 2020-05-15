@@ -1,0 +1,10 @@
+FROM ubuntu:16.04
+FROM node:10
+
+RUN mkdir /app
+COPY . /app
+WORKDIR /app
+RUN echo pwd
+RUN ["yarn","install"]
+RUN ["yarn", "start"]
+EXPOSE 3000
