@@ -1,0 +1,21 @@
+---
+  - name: 'Instala pacotes do nodejs latest'
+    apt:
+      update_cache: yes
+      cache_valid_time: 3600
+      name: nodejs
+      state: latest
+    become: yes
+  - name: "baixa chave o yarn"
+    shell: "curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -"      
+    become: yes     
+  - name: "adiciona a chave do yarn no repositorio"
+    shell: 'echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list'      
+    become: yes     
+  - name: 'Instala o yarn latest'
+    apt:
+      update_cache: yes
+      cache_valid_time: 3600
+      name: yarn
+    become: yes     
+  
