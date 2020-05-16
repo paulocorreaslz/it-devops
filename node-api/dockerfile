@@ -1,10 +1,9 @@
-FROM ubuntu:16.04
-FROM node:10
+FROM node:latest
 
-RUN mkdir /var/www
-COPY . /var/www
-WORKDIR /var/www
+WORKDIR /usr/app
+COPY . ./
+
+RUN yarn
+COPY . .
 EXPOSE 3000
-CMD ["yarn", "install"]
 CMD ["yarn", "start"]
-
