@@ -42,7 +42,7 @@ Configurando a máquina controladora (controlador pai):
 		Ao subir a máquina, verificar o caminho da ansible_ssh_private_key_file, pois pode mudar de maquina para maquina.
 		obs2: a máquina developer que irá subir está configurada a partir do arquivo VagrantFile, onde ontem as informações de nome, sistema operacional, memoria, ip e podendo conter outras configurações.
 
-3 Instalando o AWS-CLI
+3 Instalando o AWS-CLI e Docker-machine para automatizar deploy na AWS
 
 3.1 Gerando as chaves Access key e Secret Access
   Para gerar a Access Key ID, acessar o painel do administrador da AWS (https://console.aws.amazon.com/iam/home?region=us-east-1#/security_credentials) e criar uma nova chave de acesso (Create new access key)
@@ -71,7 +71,13 @@ Configurando a máquina controladora (controlador pai):
 
 3.2 Instalando o Docker-Machine para executar comandos Docker na instancia EC2 criada AWS.
 	O docker-machine é responsável por acessar e rodar comandos diretamente dentro do docker da instancia AWS criada através do AWS-CLI.
-	
+
+	Para instalar o docker-machine no linux utilize os comandos a seguir, seguindo a documentação (https://docs.docker.com/machine/install-machine/):
+	$ base=https://github.com/docker/machine/releases/download/v0.16.0 &&
+	  curl -L $base/docker-machine-$(uname -s)-$(uname -m) >/tmp/docker-machine &&
+	  sudo mv /tmp/docker-machine /usr/local/bin/docker-machine &&
+	  chmod +x /usr/local/bin/docker-machine
+
 3.3 Configurando o Docker-machine para conectar ao AWS EC2
 	docker-machine create --driver amazonec2 maq-docker-aws
 	Após a execução do comando acima, será criada uma instancia de uma máquina vazia do tipo EC2 no perfil AWS configurado pelo comando do item 3.2.3
