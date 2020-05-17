@@ -78,9 +78,9 @@ Configurando a máquina controladora (controlador pai):
 	  sudo mv /tmp/docker-machine /usr/local/bin/docker-machine &&
 	  chmod +x /usr/local/bin/docker-machine
 
-3.3 Configurando o Docker-machine para conectar ao AWS EC2
-	docker-machine create --driver amazonec2 maq-docker-aws
-	Após a execução do comando acima, será criada uma instancia de uma máquina vazia do tipo EC2 no perfil AWS configurado pelo comando do item 3.2.3
+4 Executando script para deploy automatico de container na AWS
+	sh deploy.prod.sh
+	Após a execução do comando acima, caso todos os passos tenham sidos realizados corretamente, será criada uma instância a partir dos arquivos dockerfile e docker-compose do tipo EC2 no perfil AWS configurado pelo comando do item 3.2.3 com a porta 3000 liberada.
 
 
 Tecnologias utilizadas:
