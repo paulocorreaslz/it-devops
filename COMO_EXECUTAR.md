@@ -70,7 +70,7 @@ Configurando a máquina controladora (controlador pai):
 
 	O Comando acima irá solicitar o Access Key, Acces Secret e a Região dos datacenters da AWS que deseja hospedar sua aplicação pelo mundo que foi gerado no item 3.1
 	
-3.2.3 Configurando o AWS-CLI por arquivo de configuração
+3.3 Configurando o AWS-CLI por arquivo de configuração
 	Para configurar utilizando os arquivo de configuração, após o AWS-CLI instalado na máquina, deve-se acessar/criar se nao houver o arquivo ~/.aws/credentials e adicionar as informações referentes as credenciais
 	[default]
 	aws_access_key_id=AKIAIOSFODNN7EXAMPLE
@@ -84,7 +84,7 @@ Configurando a máquina controladora (controlador pai):
 	Como referencia foi utiizado a documentação oficial de configuração da AWS em:
 	https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html
 
-3.2 Instalando o Docker-Machine para executar comandos Docker na instancia EC2 criada AWS.
+3.4 Instalando o Docker-Machine para executar comandos Docker na instancia EC2 criada AWS.
 	O docker-machine é responsável por acessar e rodar comandos diretamente dentro do docker da instancia AWS criada através do AWS-CLI.
 
 	Para instalar o docker-machine no linux utilize os comandos a seguir, seguindo a documentação (https://docs.docker.com/machine/install-machine/):
@@ -97,8 +97,14 @@ Configurando a máquina controladora (controlador pai):
 	sh deploy.prod.sh
 	Após a execução do comando acima, caso todos os passos tenham sidos realizados corretamente, será criada uma instância a partir dos arquivos dockerfile e docker-compose do tipo EC2 no perfil AWS configurado pelo comando do item 3.2.3 com a porta 3000 liberada.
 
+5 O problema 2 consiste em melhorar o processo de deploy de aplicações desenvolvidas pelo time de 	desenvolvimento.
+	Para aumentar a produtividade e realizar a automatização do processo de integração continua e deploy automatico, propoe-se a execução de um script, criado no item 4, que é responsavel por fazer o deploy do container docker que foi atualizado atraves do git em uma maquina virtual na AWS. 
+	O Script é uma versão simplificada de como pode ser automatizado o processo de criação de uma instância de uma maquina virtual EC2 na AWS a partir de um container docker, contudo sua execução nesse cenário é manual. Porém, embora seja manual, o script pode fazer parte de qualquer uma das ferramentas de Integração continua mencionadas (Jenkins, TravisCI, CircleCI etc) como parte da esteira de processo de integração continua a partir da análise e monitoramento do repositório do sistema de controle de versao (git) dos e através de jobs que podem definir quais branches ou tags devem iniciar o processo de deploy.
 
-Tecnologias utilizadas:
+	No anexo, Comparações de ferramentas, está descrita uma análise das vantagens e desvantagens de cada uma delas.
+
+
+6 Tecnologias utilizadas:
 	- docker 1.13.1
 	- docker-compose 1.24.1
 	- vagrant 2.2.6
