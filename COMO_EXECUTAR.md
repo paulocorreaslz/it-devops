@@ -94,15 +94,37 @@ Configurando a máquina controladora (controlador pai):
 	  chmod +x /usr/local/bin/docker-machine
 
 4 Executando script para resolver o problema de deploy automatico de container docker na AWS
+	
+	Executar o comando:
 	sh deploy.prod.sh
+
 	Após a execução do comando acima, caso todos os passos tenham sidos realizados corretamente, será criada uma instância a partir dos arquivos dockerfile e docker-compose do tipo EC2 no perfil AWS configurado pelo comando do item 3.2.3 com a porta 3000 liberada.
 
 5 O problema 2 consiste em melhorar o processo de deploy de aplicações desenvolvidas pelo time de 	desenvolvimento.
 	Para aumentar a produtividade e realizar a automatização do processo de integração continua e deploy automatico, propoe-se a execução de um script, criado no item 4, que é responsavel por fazer o deploy do container docker que foi atualizado atraves do git em uma maquina virtual na AWS. 
 	O Script é uma versão simplificada de como pode ser automatizado o processo de criação de uma instância de uma maquina virtual EC2 na AWS a partir de um container docker, contudo sua execução nesse cenário é manual. Porém, embora seja manual, o script pode fazer parte de qualquer uma das ferramentas de Integração continua mencionadas (Jenkins, TravisCI, CircleCI etc) como parte da esteira de processo de integração continua a partir da análise e monitoramento do repositório do sistema de controle de versao (git) dos e através de jobs que podem definir quais branches ou tags devem iniciar o processo de deploy.
 
-	No anexo, Comparações de ferramentas, está descrita uma análise das vantagens e desvantagens de cada uma delas.
+	No anexo, Comparacao_de_ferramentas.doc, está descrita uma análise das vantagens e desvantagens de cada uma delas.
 
+5.1 Acessando o painel EC2
+		
+	Uma vez que a aplicação foi implantada através do processo de deploy do script na nuvem da AWS, para descobrir o endereço IP da mesma, se faz necessário neste único momento acessar o painel do console EC2 da conta do usuário da AWS na qual a instância docker foi configurada pelo AWS-CLI no item 3 e seus subitens. Dessa forma, podemos ver o IP que foi atribuido a instancia docker da aplicação durante o processo de deploy. Para isto, acesse o link abaixo e utilize as credenciais do usuário para abrir o painel/console de gerenciamento de máquinas EC2.
+	Comando: 
+	https://console.aws.amazon.com/ec2/v2/home
+
+5.2 Descobrindo o IP
+	Para descobrir o IP, basta ir no menu lateral esquerdo "INSTANCES", sub menu "INSTANCES", será mostrada na parte direita diversas máquinas, se houver. Contudo, deverá haver uma máquina chamada "docker-node". 
+	Para ver o IP no qual a AWS atribuiu para a mesma basta clicar no nome da maquina e na parte inferior do console será mostrada uma área com diversas informações da máquina. Localize a opção "IPv4 Public IP" que mostra o IP público da instância AWS. A mesma pode ser acessada pelo endereço DNS ou ou pelo subdominio gerado automaticamente "Public DNS (IPv4)"
+	exemplo:
+	Public DNS (IPv4): 	ec2-52-23-232-102.compute-1.amazonaws.com
+	IPv4 Public IP: 52.23.232.102
+
+5.3  Testando a aplicação online
+	Para testar se a aplicação está online, basta utilizar uma das duas opções acima e digitar no navegador ou outra aplicação de sua escolha como Postman ou Insomnia a requisição GET a seguir:
+	exemplo: http://ec2-52-23-232-102.compute-1.amazonaws.com:3000
+			 http://52.23.232.102:3000
+	
+	Caso tudo tenha sido realizado com sucesso, o retorno do endpoint "/" do verbo http GET deverá ser "Hello World"
 
 6 Tecnologias utilizadas:
 	- docker 1.13.1
