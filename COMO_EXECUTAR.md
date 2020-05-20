@@ -51,6 +51,9 @@ Configurando a máquina controladora (controlador pai):
 	 	sudo apt-get install ansible python vagrant 
 
 2.2 - Subindo uma maquina (nó filho que será controlado) vagrant do tipo developer com ambiente configurado para simular o ambiente do programador.
+		Obs: antes de rodar o comando do ansible, é necessário subir o vagrant para criar a maquina virtual com o comando : vagrant up
+
+		em seguida, rodar o comando abaixo para instalar os pacotes.
 		ansible-playbook provisioning.yml -i hosts 
 		
 		obs: o arquivo hosts possui as informações para subir uma maquina virtual, contem o ip, usuario de acesso para configuração das maquinas e a chave de acesso gerada pelo vagrant, conforme a seguir. ex: 172.20.1.4 ansible_user=vagrant ansible_ssh_private_key_file=".vagrant/machines/developer/virtualbox/private_key"
@@ -128,7 +131,7 @@ Configurando a máquina controladora (controlador pai):
 
 6 Tecnologias utilizadas:
 	- docker 1.13.1
-	- docker-compose 1.24.1
+	- docker-compose 1.24.1 - 1.25.5
 	- vagrant 2.2.6
 	- ansible 2.5.3
 	- docker-machine 0.16.0

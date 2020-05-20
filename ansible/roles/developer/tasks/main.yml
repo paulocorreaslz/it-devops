@@ -18,4 +18,29 @@
       cache_valid_time: 3600
       name: yarn
     become: yes     
+  - name: "instala o git..."
+    apt:
+      update_cache: yes
+      cache_valid_time: 3600
+      name: git
+      state: latest
+    become: yes
+  - name: 'Instala pacotes do docker'
+    apt:
+      update_cache: yes
+      cache_valid_time: 3600
+      name: docker
+      state: latest
+    become: yes
+  - name: 'Instala pacotes do docker-compose'
+    shell: 'sudo curl -L "https://github.com/docker/compose/releases/download/1.25.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose'
+  - name: 'Inserir permissoes do docker-compose'
+    shell: 'sudo chmod +x /usr/local/bin/docker-compose'
+    become: yes
+  - name: 'Criar atalhos para docker-compose'
+    shell: 'sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose'
+    become: yes
+
+    
   
+    
