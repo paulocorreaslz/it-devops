@@ -137,10 +137,33 @@ Configurando a máquina controladora (controlador pai):
 	
 	Caso tudo tenha sido realizado com sucesso, o retorno do endpoint "/" do verbo http GET deverá ser "Hello World"
 
-6 Tecnologias utilizadas:
+6 - Bônus (Prometheus e Grafana)
+	Ademais as tecnologias já instaladas, foi adicionado uma pasta monitoramento para rodar como um módulo local, chamada monitoramento.
+	Dentro desta pasta estão duas aplicações das mais utilizadas no mercado, o Prometheus e Grafana. 
+	A primeira temo objetivo de buscar os dados de métricas nas apis das aplicações. O segundo tem como objetivo criar dashboard para melhor visualização desses dados. Foi adicionado um servido de teste de dados de metricas conhecido como Exporter, para gerar dados para o prometheus.
+	
+	Para levantar os serviços basta entrar na pasta "monitoramento" e digitar o comando:
+		make up
+
+	Para acessar:
+		Prometheus - http://localhost:9090
+		Grafana - http://localhost:4000
+		node-exporter - http://localhost:9100
+
+7 Orientações sobre o makefile
+	O Makefile é um arquivo criado para abstrair os comandos do docker-compose e facilitar a forma de como subir, destruir e ver os logs dos serviços docker.
+	Ele possui 3 comandos.
+	make up - para criar os containers docker
+	make down - para destruir os containers
+	make logs - para ver os logs de um container que esta ativo
+
+
+8 Tecnologias utilizadas:
 	- docker 1.13.1
 	- docker-compose 1.24.1 - 1.25.5
 	- vagrant 2.2.6
 	- ansible 2.5.3
 	- docker-machine 0.16.0
 	- AWS-CLI/2.0.14 Python/3.7.3 Linux/4.15.0-29deepin-generic botocore/2.0.0dev18
+	- Prometheus:latest
+	- Grafana:latest
