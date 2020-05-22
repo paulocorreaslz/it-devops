@@ -51,7 +51,8 @@ Configurando a máquina controladora (controlador pai):
 	 	sudo apt-get install ansible python vagrant 
 
 2.2 - Subindo uma maquina (nó filho que será controlado) vagrant do tipo developer com ambiente configurado para simular o ambiente do programador.
-		Obs: antes de rodar o comando do ansible, é necessário subir o vagrant para criar a maquina virtual com o comando : vagrant up
+		Obs: antes de rodar o comando do ansible, é necessário subir o vagrant para criar a maquina virtual com o comando : vagrant up 
+		o comando subira duas maquinas que estao no arquivo hosts, que poderao ser acessadas por ssh para testar se foram devidamente configuradas. 
 
 		em seguida, rodar o comando abaixo para instalar os pacotes.
 		ansible-playbook provisioning.yml -i hosts 
@@ -59,6 +60,13 @@ Configurando a máquina controladora (controlador pai):
 		obs: o arquivo hosts possui as informações para subir uma maquina virtual, contem o ip, usuario de acesso para configuração das maquinas e a chave de acesso gerada pelo vagrant, conforme a seguir. ex: 172.20.1.4 ansible_user=vagrant ansible_ssh_private_key_file=".vagrant/machines/developer/virtualbox/private_key"
 		Ao subir a máquina, verificar o caminho da ansible_ssh_private_key_file, pois pode mudar de maquina para maquina.
 		obs2: a máquina developer que irá subir está configurada a partir do arquivo VagrantFile, onde ontem as informações de nome, sistema operacional, memoria, ip e podendo conter outras configurações.
+
+		apos as maquinas levantadas, para acessa-las basta usar o usuario vagrant e senha vagrant com o comando:
+		ssh vagrant@172.20.1.4
+		ou
+		ssh vagrant@172.20.1.5 
+
+		uma vez dentro da maquina pode se testar os aplicativos instalados pelo provisionamento do ansible: docker, docker-compose, yarn, etc.
 
 3 Instalando o AWS-CLI e Docker-machine para automatizar deploy na AWS
 
