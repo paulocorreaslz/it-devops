@@ -1,5 +1,3 @@
-include .env
-
 .MONITOR: up
 
 up:
